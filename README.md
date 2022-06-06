@@ -70,4 +70,25 @@ velero snapshot-location get -o yaml
   
 
 velero install --provider aws --plugins velero/velero-plugin-for-aws:v1.0.1 --bucket stage-velero-backup --backup-location-config region=us-east-1,name=aws --snapshot-location-config region=us-east-1,name=aws --secret-file /Users/tundeafolabi/.aws/credentials
-    
+
+ kubectl apply -f  prometheus 
+ 
+ kubectl get crds
+  
+kubectl get pods -n monitoring  
+  
+helm repo add ingress-nginx \https://kubernetes.github.io/ingress-nginx
+  
+helm template my-ing ingress-nginx/ingress-nginx \
+--namespace ingress \
+--version 4.1.3 \
+--values values.yaml \
+--output-dir my-ing
+  
+  helm install my-ing ingress-nginx/ingress-nginx \
+--namespace ingress \
+--version 4.1.3 \
+--values values.yaml \
+--create-namespace
+
+  helm uninstall deployment01 -n opsb-helm --no-hooks
