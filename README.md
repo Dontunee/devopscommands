@@ -1,16 +1,13 @@
 # devopscommands
 Just to make my devops commands available whenever i need them , i will do well to the command description from time to time but apologies if it isnt updated you can make also help out 
 
-velero install --provider aws --plugins velero/velero-plugin-for-aws:v1.0.1 --bucket zoocasa-stage-velero-backup --backup-location-config region=us-east-1 --snapshot-location-config region=us-east-1 --secret-file /Users/tundeafolabi/.aws/credentials
+velero install --provider aws --plugins velero/velero-plugin-for-aws:v1.0.1 --bucket elero-backup --backup-location-config region=us-east-1 --snapshot-location-config region=us-east-1 --secret-file /Users/tundeafolabi/.aws/credentials
 
 Instructions 
 
 How to restore back up of an existing Cluster on a new Cluster Using Velero 
 
 PreConditions 
-
-1> Get Existing Cluster Name 
-  e.g zoocasa-prod, zoocasa-stage
 
 2> Get Existing Cluster backup location on Object Storage (e.g S3)
    velero get backup-locations
@@ -27,19 +24,19 @@ Get user logged on
 aws sts get-caller-identity 
 
 Connect to a cluster
-aws eks update-kubeconfig --name zoocasa-repl   
+aws eks update-kubeconfig --name replice
 
 Get Current context 
 kubectl config current-context
 
 Create helm 
-helm create zoocasa-helm
+helm create helm
 
 Install helm 
-helm install zoocasa-helm .
+helm install helm .
 
 Upgrade helm
-helm upgrade zoocasa-helm .
+helm upgrade helm .
 
 Get pods
 Kubectl get pods 
@@ -72,5 +69,5 @@ velero snapshot-location get -o yaml
 
   
 
-velero install --provider aws --plugins velero/velero-plugin-for-aws:v1.0.1 --bucket zoocasa-stage-velero-backup --backup-location-config region=us-east-1,name=aws --snapshot-location-config region=us-east-1,name=aws --secret-file /Users/tundeafolabi/.aws/credentials
+velero install --provider aws --plugins velero/velero-plugin-for-aws:v1.0.1 --bucket stage-velero-backup --backup-location-config region=us-east-1,name=aws --snapshot-location-config region=us-east-1,name=aws --secret-file /Users/tundeafolabi/.aws/credentials
     
