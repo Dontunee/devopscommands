@@ -92,3 +92,11 @@ helm template my-ing ingress-nginx/ingress-nginx \
 --create-namespace
 
   helm uninstall deployment01 -n opsb-helm --no-hooks
+   
+  helm list -n ingress
+   
+  kubectl get svc -n ingress 
+   
+ kubectl port-forward svc/prometheus-operated 9090 -n monitoring
+   
+ kubectl get svc -n monitoring 
