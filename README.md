@@ -1,4 +1,29 @@
-# devopscommands
+# DOCKER
+docker version.  
+docker login    
+docker images.  
+docker rmi {{imageid}}. 
+docker pull stacksimplify/dockerinto-springboot-helloworld-rest-api     
+docker ps.   
+docker run --name app1 -p 80:8080 stacksimplify/dockerintro-springboot-helloworld-rest-api:1.0.0-RELEASE.    
+docker ps -a   
+docker ps -a -q    
+docker exec -it {{containename}} /bin/sh // connect to container terminal. 
+ps ef
+docker stop {{containername}}
+docker start {{containename}}
+docker rm {{containername}}.  
+docker build -t afolabiba/mynginx_image:v1 .   
+docker tag afolabiba/mynginx_image:v2 afolabiba/mynginx_image:v1-release     
+ docker push afolabiba/mynginx_image:v1-release     
+ docker pull image-info    
+ docker port {{containedId}}.   
+ docker stats    
+ 
+
+
+
+# AWS DEVOPS COMMANDS 
 Just to make my devops commands available whenever i need them , i will do well to the command description from time to time but apologies if it isnt updated you can make also help out 
 
 velero install --provider aws --plugins velero/velero-plugin-for-aws:v1.0.1 --bucket elero-backup --backup-location-config region=us-east-1 --snapshot-location-config region=us-east-1 --secret-file /Users/tundeafolabi/.aws/credentials
@@ -26,7 +51,7 @@ aws sts get-caller-identity
 Connect to a cluster
 aws eks update-kubeconfig --name replice
 
-Get Current context 
+Get Current context     
 kubectl config current-context
 
 Create helm 
@@ -46,9 +71,6 @@ Kubectl get svc
 
 
 aws eks list-clusters
-
-error restoring ingresses.extensions/kube-system/kibana-ingress: Internal error occurred: failed calling webhook “validate.nginx.ingress.kubernetes.io" velar restore
-
 
 velero restore describe velero-dailybackups-20220601214522-20220604111536
 
@@ -99,4 +121,52 @@ helm template my-ing ingress-nginx/ingress-nginx \
    
  kubectl port-forward svc/prometheus-operated 9090 -n monitoring
    
- kubectl get svc -n monitoring 
+ kubectl get svc -n monitoring  
+ 
+aws ec2 describe-vpcs.   
+kubectl version --short --client.  
+eksctl version.  
+
+**CREATE CLUSTER STEPS **.   
+eksctl create cluster --name=eksdemo1 --region=us-east-1 --zones=us-east-1a,us-east-1b --without-nodegroup.   
+kubectl get pods   
+eksctl get clusters    
+
+** CREATE & ASSOCIATE OIDC PROVIDER FOR OUR EKS CLUSTER **   
+   eksctl utils associate-iam-oidc-provider --region us-east-1 --cluster eksdemo1 --approve
+   
+**CREATE NODE GROUP WITH ADDITIONAL ADD-ONS IN PUBLIC SUBNETS **.    
+   eksctl create nodegroup --cluster=eksdemo1  \
+                           --region=us-east-1 \
+                           --name=eksdemo1-ng-public1 \
+                           --node-type=t3.medium \
+                           --nodes=2   \
+                           --nodes-min=2 \
+                           --nodes-max=4 \
+                           --node-volume-size=20 \
+                           --ssh-access \
+                           --ssh-public-key=kube-demo \
+                           --managed \
+                           --asg-access \
+                           --external-dns-access \
+                           --full-ecr-access \
+                           --appmesh-access \
+                           --alb-ingress-access
+  
+   eksctl get nodegroup --cluster=eksdemo1. 
+   kubectl get nodes -o wide   
+   kubectl config view --minify.   
+   ssh -i kube-demo.cer ec2-user@3.80.138.17
+   df -h    
+   
+   eksctl delete nodegroup --cluster={{clustername}} --name={{nodegroupname}}}.   
+   eksctl delete cluster {{clustername}}.  
+   
+   
+   
+   
+   
+   
+   
+   
+ 
