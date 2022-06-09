@@ -21,7 +21,7 @@ docker tag afolabiba/mynginx_image:v2 afolabiba/mynginx_image:v1-release
  docker stats    
  
  
- ELASTIC SEARCH 
+** ELASTIC SEARCH **
  GET _cluster/health  
  GET _nodes/stats 
 
@@ -119,9 +119,103 @@ GET news_headlines/_search
   }
 }
 
+**Get search results from this index, query all documents that match this criteria below, 
+grab all documents that include the dearch term in the field specified **
+{
+  "query":{
+    "match": {
+      "content": {
+        "query": "python programming language"
+      }
+    }
+  }
+}
+
+****ADVANCED SEARCH****
+**exact match of words and must appear next to each other **
+{
+  "query": {
+    "match_phrase": {
+      "headline": {
+        "query": "Shape of you"
+      }
+    }
+  }
+}
+
+**MULITPLE FIELD QUERIES **
+{
+  "query": {
+    "multi_match": {
+      "query": "MICHELLE OBAMA",
+      "fields": ["headline^2", "short_description","authors"]
+    }
+  }
+}
+
+{
+  "query": {
+    "multi_match": {
+      "query": "MICHELLE OBAMA",
+      "fields": ["headline^2", "short_description","authors"],
+      "type": "phrase"
+    }
+  }
+}
 
 
- 
+**COMBINED QUERIES **
+{
+  "query": {
+    "bool": {
+      "must": [{one or more queries}],
+       "must_not": [{one or more queries}],
+        "should": [{one or more queries}],
+         "filter": [{one or more queries}],
+    }
+  }
+}
+
+ {
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match_phrase": {
+            "headline": "Michelle Obama"
+          }
+        },
+        {
+          "match": {
+            "category": "Politics"
+          }
+        }
+        ]
+    }
+  }
+}
+
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match_phrase": {
+            "headline": "Michelle Obama"
+          }
+        }
+        ],
+        "filter":{
+          "range": {
+            "date": {
+              "gte": "2014-03-25",
+              "lte": "2016-03-25"
+            }
+          }
+        }
+    }
+  }
+}
  
 
 
