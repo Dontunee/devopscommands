@@ -20,6 +20,109 @@ docker tag afolabiba/mynginx_image:v2 afolabiba/mynginx_image:v1-release
  docker port {{containedId}}.   
  docker stats    
  
+ 
+ ELASTIC SEARCH 
+ GET _cluster/health  
+ GET _nodes/stats 
+
+PUT favorite_candy
+
+POST favorite_candy/_doc
+{
+  "firstName": "Tunde",
+  "candy": "Bounty"
+}    
+
+PUT favorite_candy/_doc/3
+{
+  "firstName": "Kay",
+  "candy": "skittles"
+}   
+
+GET favorite_candy/_doc/1   
+
+PUT favorite_candy/_create/1
+{
+   "firstName": "Tunes",
+  "candy": "coke"
+}
+
+POST favorite_candy/_update/1
+{
+  "doc": {
+    "candy": "M&M's"
+  }
+}
+
+DELETE favorite_candy/_doc/3.  
+
+GET news_headlines/_search
+
+**QUERY**
+{
+  "query": {
+    "range": {
+      "date": {
+        "gte": "2015-06-20",
+        "lte": "2015-06-20"
+      }
+    }
+  }
+}
+
+{
+  "query": {
+    "match": {
+      "headline": {
+        "query": "khloe jennery kardashian",
+        "operator": "and"
+      }
+    }
+  }
+}
+
+**AGGREGATION**
+{
+  "aggs": {
+    "by_category": {
+      "terms": {
+        "field": "category",
+        "size": 100
+      }
+    }
+  }
+}
+
+**query all documents that match the below criteris, bring all documetns that contain bla bla bla in headline field**
+{
+  "query": {
+    "match": {
+      "headline": {
+        "query": "sdkjksjdsk dsjdsjsjsjkd"
+      }
+    }
+  }
+}
+**QUERY AND AGGREGATION **
+GET search results from the news_headlines index, first query all documents that match the entertainment category criteria ,
+and run aggregations on the result and the report to be name popular_in_entertainment and run analysis on the significant text found 
+in field HEADLINE
+GET news_headlines/_search
+{
+  "query": {
+    "match": { "category": "ENTERTAINMENT"}
+  },
+  "aggregations": {
+    "popular_in_entertainment": {
+      "significant_text": {"field": "headline"}
+    }
+  }
+}
+
+
+
+ 
+ 
 
 
 
@@ -161,6 +264,43 @@ eksctl get clusters
    
    eksctl delete nodegroup --cluster={{clustername}} --name={{nodegroupname}}}.   
    eksctl delete cluster {{clustername}}.  
+ kubectl get nodes -o wide.   
+  kubectl run my-first-pod --image afolabiba/mynginx_image:1.0.0.  
+  kubectl delete pod my-first-pod.  
+ kubectl expose pod my-first-pod --type=NodePort --port=80 --name=my-first-service     
+ kubectl get service.  
+ kubectl get nodes -o wide.  
+ kubectl expose pod my-first-pod --type=NodePort --port=81 --target-port=80 --name=my-first-service  
+ kubectl logs my-first-pod.   
+ kubectl logs -f my-first-pod.   
+ 
+ 
+ kubectl logs my-pod                                 # dump pod logs (stdout).   
+kubectl logs -l name=myLabel                        # dump pod logs, with label name=myLabel (stdout).    
+kubectl logs my-pod --previous                      # dump pod logs (stdout) for a previous instantiation of a container.   
+kubectl logs my-pod -c my-container                 # dump pod container logs (stdout, multi-container case).   
+kubectl logs -l name=myLabel -c my-container        # dump pod logs, with label name=myLabel (stdout).    
+kubectl logs my-pod -c my-container --previous      # dump pod container logs (stdout, multi-container case) for a previous instantiation of a container.   
+kubectl logs -f my-pod                              # stream pod logs (stdout).   
+kubectl logs -f my-pod -c my-container              # stream pod container logs (stdout, multi-container case).   
+kubectl logs -f -l name=myLabel --all-containers    # stream all pods logs with label name=myLabel (stdout).   
+kubectl run -i --tty busybox --image=busybox:1.28 -- sh  # Run pod as interactive shell.    
+kubectl run nginx --image=nginx -n mynamespace      # Start a single instance of nginx pod in the namespace of mynamespace.   
+kubectl run nginx --image=nginx                     # Run pod nginx and write its spec into a file called pod.yaml.    
+--dry-run=client -o yaml > pod.yaml.    
+
+kubectl attach my-pod -i                            # Attach to Running Container.    
+kubectl port-forward my-pod 5000:6000               # Listen on port 5000 on the local machine and forward to port 6000 on my-pod.   
+kubectl exec my-pod -- ls /                         # Run command in existing pod (1 container case).   
+kubectl exec --stdin --tty my-pod -- /bin/sh        # Interactive shell access to a running pod (1 container case).    
+kubectl exec my-pod -c my-container -- ls /         # Run command in existing pod (multi-container case).    
+kubectl top pod POD_NAME --containers               # Show metrics for a given pod and its containers.     
+kubectl top pod POD_NAME --sort-by=cpu              # Show metrics for a given pod and sort it by 'cpu' or 'memory'.        
+ 
+ 
+ 
+ 
+
    
    
    
