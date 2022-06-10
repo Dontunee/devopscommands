@@ -392,6 +392,32 @@ kubectl top pod POD_NAME --containers               # Show metrics for a given p
 kubectl top pod POD_NAME --sort-by=cpu              # Show metrics for a given pod and sort it by 'cpu' or 'memory'.        
  
  
+** create a pod    **
+ kubectl run <desired-pod-name>. --image <container-image> --generator=run-pod/v1.  
+ **e expose pod as a service **.  
+ kubectl expose pod <pod-name> --type=NodePort --port=80 --name=<service-name>.      
+ 
+ ** connect to a pod **.   
+ kubectl exec -it <pod-name> -- /bin/bash.  
+ 
+ ** Get environment variables in a container**.  
+ kubectl exec -it <pod-name> env.   
+ 
+ ** Get yaml ouput of pod and service **.   
+ kubectl get pod <pod-name> -o yaml.   
+ kubetcl get svc <service-name> -o yaml.     
+ 
+ ** Get all objects in default namespace **
+ kubectl get all
+ 
+ **Deletion** 
+ kubectl delete pod <pod-name>
+ kubectl delete svc <service-name>
+ 
+  
+ 
+ 
+ 
  
  
 
