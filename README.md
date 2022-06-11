@@ -409,40 +409,62 @@ kubectl top pod POD_NAME --sort-by=cpu              # Show metrics for a given p
  kubectl get pod <pod-name> -o yaml.   
  kubetcl get svc <service-name> -o yaml.     
  
- ** Get all objects in default namespace **
+ ** Get all objects in default namespace **.  
  kubectl get all
  
- **Deletion** 
- kubectl delete pod <pod-name>
- kubectl delete svc <service-name>
+ **Deletion**    
+ kubectl delete pod <pod-name>.  
+ kubectl delete svc <service-name>.  
 
-**create replicat set with yml**
-kubectl create -f replicaset-demo.yml  
-kubectl get replicaset 
-kubectl descibe replicaset <replicasetname>
+**create replica set with yml**. 
+kubectl create -f replicaset-demo.yml     
+kubectl get replicaset    
+kubectl descibe replicaset <replicasetname>   
 
-**expose replica set as a service**
-kubectl expose rs <replicaset-name> --type=NodePort --port=80 --target-port=8080 --name=<service-name-to-be-created>
+**expose replica set as a service**.   
+kubectl expose rs <replicaset-name> --type=NodePort --port=80 --target-port=8080 --name=<service-name-to-be-created>.  
 
-**replace existing yml**
-kubectl replace -f replicaset-demo.yml
+**replace existing yml**.  
+kubectl replace -f replicaset-demo.yml.  
 
-**creating a deployment**   
-kubectl create deployment <deploymentname> --image<container-image>
-kubect get deployments
-kubectl descirbe deployment <deployment-name>
-kubectl scale --replicas=<number-of-replicas> deployment <deployment-name>
+**creating a deployment**     
+kubectl create deployment <deploymentname> --image<container-image>.   
+kubect get deployments. 
+kubectl descirbe deployment <deployment-name>.  
+kubectl scale --replicas=<number-of-replicas> deployment <deployment-name>.  
 
-**expose deployment as a service**
-kubectl expose deployment <deployment-name> --type=NodePort --port=80 --target-port=80 --name=<deployment-service-name>
-kubectl get svc 
+**expose deployment as a service**.  
+kubectl expose deployment <deployment-name> --type=NodePort --port=80 --target-port=80 --name=<deployment-service-name>   
+kubectl get svc    
 
 
-**Update Deployment**
-**Set Image**
+**Update Deployment**.  
+**Get Container Name**.  
+kubectl get deployment <deploymentName> -o yaml   
+ 
+ **Set Image**.  
+ kubectl set image deployment/<deploymentName> <containerName>=<containerImage> --record=true.    
+ kubectl rollout status deployment/<deploymentName>.  
+ kubectl describe deployment <deploymentName>.  
+ kubectl rollout history deployment/<deploymentName>.  
+ kubectl rollout history deployment/<deploymentName> --revision<revisionNumber>
+ 
+ 
+ **Using Edit Deployment**
+ kubectl edit deployment/<deploymentName> --record=true.  
+ 
+ **Roll Back Deployment**
+ kubectl rollout undo deployment <deploymentName>.   
+ kubectl rollout undo deployment/<deploymentName> --to-revision=<revisionNumber>.     
+ 
+ 
+ **Rolling Restarts**
+ kubectl rollout restart deployment/<deploymentName>.   
+ 
+ ** Deploying a back end application **
+kubectl create deployment <deploymentName> --image<container-image>.  
+kubectl expose deployment <deploymentName> --port=<portNumber> --target-port=<targetPortNumber> --name=<serviceName> 
 
-**Get Container Name**
-kubectl get deployment <deploymentName> -o yaml
 
 
 
