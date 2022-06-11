@@ -368,7 +368,9 @@ eksctl get clusters
  kubectl logs my-first-pod.   
  kubectl logs -f my-first-pod.   
  
- 
+ **Get owner of pod** 
+ kubectl get pods <pod-name> -o yaml 
+
  kubectl logs my-pod                                 # dump pod logs (stdout).   
 kubectl logs -l name=myLabel                        # dump pod logs, with label name=myLabel (stdout).    
 kubectl logs my-pod --previous                      # dump pod logs (stdout) for a previous instantiation of a container.   
@@ -413,7 +415,37 @@ kubectl top pod POD_NAME --sort-by=cpu              # Show metrics for a given p
  **Deletion** 
  kubectl delete pod <pod-name>
  kubectl delete svc <service-name>
- 
+
+**create replicat set with yml**
+kubectl create -f replicaset-demo.yml  
+kubectl get replicaset 
+kubectl descibe replicaset <replicasetname>
+
+**expose replica set as a service**
+kubectl expose rs <replicaset-name> --type=NodePort --port=80 --target-port=8080 --name=<service-name-to-be-created>
+
+**replace existing yml**
+kubectl replace -f replicaset-demo.yml
+
+**creating a deployment**   
+kubectl create deployment <deploymentname> --image<container-image>
+kubect get deployments
+kubectl descirbe deployment <deployment-name>
+kubectl scale --replicas=<number-of-replicas> deployment <deployment-name>
+
+**expose deployment as a service**
+kubectl expose deployment <deployment-name> --type=NodePort --port=80 --target-port=80 --name=<deployment-service-name>
+kubectl get svc 
+
+
+**Update Deployment**
+**Set Image**
+
+**Get Container Name**
+kubectl get deployment <deploymentName> -o yaml
+
+
+
   
  
  
