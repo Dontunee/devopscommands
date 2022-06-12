@@ -400,9 +400,14 @@ kubectl top pod POD_NAME --sort-by=cpu              # Show metrics for a given p
  
  
  eksctl upgrade cluster -f <ymlfilename> --approve   
+ 
+ **upgrading non managed node groups**
+ // chnage the name and run the below commands
  eksctl create nodegroup -f config.yaml
  eksctl delete nodegroup -f <ymlfilename> --only-missing --approve
  
+ **upgrading managed node groups**
+eksctl upgrade nodegroup --cluster <clusterName> --name managed --kubernetes-version <versionNumber> 
  
  
 
