@@ -393,21 +393,21 @@ kubectl top pod POD_NAME --sort-by=cpu              # Show metrics for a given p
  
  
  kubectl cluster-info dump.   
- eksctl utils   
- eksctl utils update-kube-proxy --name={{clustername}} --approve // kubernetes agent.  
- eksctl utils update-aws-node // controller
- eksctl utils update-coresdns //for dns resolution. 
+ eksctl utils     
+ eksctl utils update-kube-proxy --name={{clustername}} --approve // kubernetes agent.    
+ eksctl utils update-aws-node // controller. 
+ eksctl utils update-coresdns //for dns resolution.   
  
  
  eksctl upgrade cluster -f <ymlfilename> --approve   
  
- **upgrading non managed node groups**
+ **upgrading non managed node groups**.   
  // chnage the name and run the below commands
- eksctl create nodegroup -f config.yaml
- eksctl delete nodegroup -f <ymlfilename> --only-missing --approve
+ eksctl create nodegroup -f config.yaml.  
+ eksctl delete nodegroup -f <ymlfilename> --only-missing --approve.  
  
- **upgrading managed node groups**
-eksctl upgrade nodegroup --cluster <clusterName> --name managed --kubernetes-version <versionNumber> 
+ ** upgrading managed node groups **.     
+eksctl upgrade nodegroup --cluster <clusterName> --name managed --kubernetes-version <versionNumber>    
  
  
 
