@@ -408,7 +408,9 @@ kubectl top pod POD_NAME --sort-by=cpu              # Show metrics for a given p
  
  ** upgrading managed node groups **.     
 eksctl upgrade nodegroup --cluster <clusterName> --name managed --kubernetes-version <versionNumber>    
- 
+
+ kubectl get events --sort-by='.lastTimestamp' -n kube-system
+ kubectl top nodes --sort-by=cpu  
  
 
    
