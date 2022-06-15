@@ -407,9 +407,9 @@ kubectl top pod POD_NAME --sort-by=cpu              # Show metrics for a given p
  eksctl delete nodegroup -f <ymlfilename> --only-missing --approve.  
  
  ** upgrading managed node groups **.     
-eksctl upgrade nodegroup --cluster <clusterName> --name managed --kubernetes-version <versionNumber>    
+eksctl upgrade nodegroup --cluster <clusterName> --name managed --kubernetes-version <versionNumber>       
 
- kubectl get events --sort-by='.lastTimestamp' -n kube-system
+ kubectl get events --sort-by='.lastTimestamp' -n kube-system.   
  kubectl top nodes --sort-by=cpu  
  
 
