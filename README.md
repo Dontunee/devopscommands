@@ -410,7 +410,17 @@ kubectl top pod POD_NAME --sort-by=cpu              # Show metrics for a given p
 eksctl upgrade nodegroup --cluster <clusterName> --name managed --kubernetes-version <versionNumber>       
 
  kubectl get events --sort-by='.lastTimestamp' -n kube-system.   
- kubectl top nodes --sort-by=cpu  
+ kubectl top nodes --sort-by=cpu     
+ 
+ kubectl get po -n stage.   
+ 
+ kubectl get namespaces    
+ 
+ kubectl get svc -n monitoring.    
+ 
+ kubectl get no -n monitoring -o wide     
+ 
+ 
  
 
    
